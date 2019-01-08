@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "webpack --config ./webpack.dev.config.js",
+    "build": "webpack --config ./webpack.prod.config.js",
+    "server": "live-server"
+  },
+  "dependencies": {
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.23.1",
+    "vue": "^2.5.21"
+  }
+}
