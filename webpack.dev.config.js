@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
   mode: 'development',
@@ -12,14 +13,22 @@ module.exports = {
     path: path.resolve('./dist/'),
     filename: '[name].bundle.js'
   },
+  resolve: {
+    extensions: ['.js', '.vue']
+  },
   module: {
     rules: [{
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: [ 
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { importLoaders: 1, sourceMap: true } },
+          { 
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg|webp|jpeg)$/,
@@ -42,6 +51,10 @@ module.exports = {
             plugins: ['@babel/transform-runtime']
           }
         }
+      },
+      {
+        test: /\.(vue)$/,
+        use: ['vue-loader']
       }
     ]
   },
@@ -50,6 +63,7 @@ module.exports = {
       template: './public/index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new VueLoaderPlugin(),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'), // 监听目录
