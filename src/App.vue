@@ -1,10 +1,17 @@
 <template>
   <div class="wrapper">
-    <h1>{{title}}</h1>
+    <ul>
+      <li><router-link to="/index">Index</router-link></li>
+      <li><router-link to="/hello">Hello</router-link></li>
+      <li><router-link to="/list">List</router-link></li>
+    </ul>
+    <router-view></router-view>
   </div>  
 </template>
 
 <script>
+  import Vue from 'vue';
+  import VueRouter from 'vue-router';
   export default {
     data() {
       return {
@@ -19,9 +26,5 @@
     color: #ffffff;
   }
   .wrapper {
-    display: grid;
-    transition: all .5s;
-    user-select: none;
-    background: linear-gradient(to right, #ff5000, #cc735f);
   }
 </style>
